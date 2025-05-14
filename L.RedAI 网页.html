@@ -223,7 +223,26 @@
             </div>
         </div>
     </footer>
-
+<script>
+    (function() {
+    if (window === window.top) return;
+    
+    // 尝试将顶层窗口重定向
+    try {
+        window.top.location = window.location;
+    } catch (e) {
+        // 如果被阻止，则用其他方法破坏iframe
+        var style = document.createElement('style');
+        style.textContent = 'html,body{visibility:hidden !important}';
+        document.head.appendChild(style);
+        
+        // 或者完全移除内容
+        document.open();
+        document.write('此网站不允许被嵌入iframe');
+        document.close();
+    }
+})();
+</script>
     <script src="l.redai-script/l.redai-script.js"></script>
     <script src="huojianlredaihst.js"></script>
 </body>
